@@ -25,7 +25,7 @@ Window {
             Rectangle { width: 32; height: 32; radius: OpenUI.shapeXs
                 color: hover.hovered ? Qt.rgba(OpenUI.error.r, OpenUI.error.g,
                                                OpenUI.error.b, 0.3) : "transparent"
-                Text { anchors.centerIn: parent; text: "\u2715"; color: OpenUI.onSurface }
+                ThemedIcon { anchors.centerIn: parent; name: "window-close"; ctx: "Actions"; size: 14; color: OpenUI.onSurface }
                 MouseArea { id: hover; anchors.fill: parent; hoverEnabled: true
                     onClicked: oakApp.close() }
             }
@@ -37,7 +37,10 @@ Window {
                 color: Qt.rgba(OpenUI.primary.r, OpenUI.primary.g, OpenUI.primary.b, 0.15)
                 Column { anchors.centerIn: parent; spacing: 4
                     Text { text: "保护状态"; color: OpenUI.onSurfaceVariant; font.pixelSize: OpenUI.typeLabelM }
-                    Text { text: "\u2713 已启用"; color: OpenUI.primary; font.pixelSize: OpenUI.typeTitle; font.bold: true }
+                    Row { spacing: OpenUI.sp1; anchors.horizontalCenter: parent.horizontalCenter
+                        ThemedIcon { name: "checkmark"; ctx: "Actions"; size: 18; color: OpenUI.primary; anchors.verticalCenter: parent.verticalCenter }
+                        Text { text: "已启用"; color: OpenUI.primary; font.pixelSize: OpenUI.typeTitle; font.bold: true; verticalAlignment: Text.AlignVCenter }
+                    }
                 }
             }
             Rectangle { width: (parent.width - OpenUI.sp3)/2; height: 70; radius: OpenUI.shapeSm
@@ -64,7 +67,7 @@ Window {
                 Row { width: parent.width; spacing: OpenUI.sp3
                     Text { width: 100; text: model.name; color: OpenUI.onSurface; font.pixelSize: OpenUI.typeBodyM; font.bold: true }
                     Text { width: 120; text: model.desc; color: OpenUI.onSurfaceVariant; font.pixelSize: OpenUI.typeLabelM }
-                    Text { text: "\uD83D\uDD12 已保护"; color: OpenUI.primary; font.pixelSize: OpenUI.typeLabelM }
+                    Text { text: "已保护"; color: OpenUI.primary; font.pixelSize: OpenUI.typeLabelM }
                 } }
             }
         }

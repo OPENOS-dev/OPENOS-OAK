@@ -5,6 +5,8 @@
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QUrl>
+#include "iconloader.h"
+#include "iconprovider.h"
 
 int main(int argc, char** argv)
 {
@@ -13,6 +15,10 @@ int main(int argc, char** argv)
     app.setQuitOnLastWindowClosed(true);
 
     QQmlApplicationEngine engine;
+
+    engine.addImageProvider(QStringLiteral("icons"), new IconProvider);
+    IconLoader iconLoader(&app);
+    engine.rootContext()->setContextProperty("_iconLoader", &iconLoader);
     QQmlComponent token(&engine, QUrl(QStringLiteral("qrc:/qml/OpenUI.qml")));
     QObject* openUI = token.create();
     engine.rootContext()->setContextProperty("OpenUI", openUI);
